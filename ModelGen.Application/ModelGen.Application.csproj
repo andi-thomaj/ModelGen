@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ModelGen.Domain\ModelGen.Domain.csproj" />
+    <ProjectReference Include="..\ModelGen.Shared\ModelGen.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

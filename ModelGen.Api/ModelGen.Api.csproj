@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ModelGen.Application\ModelGen.Application.csproj" />
+    <ProjectReference Include="..\ModelGen.Domain\ModelGen.Domain.csproj" />
+    <ProjectReference Include="..\ModelGen.Infrastructure\ModelGen.Infrastructure.csproj" />
+    <ProjectReference Include="..\ModelGen.Shared\ModelGen.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

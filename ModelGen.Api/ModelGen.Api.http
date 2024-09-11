@@ -1,0 +1,6 @@
+@ModelGen.Api_HostAddress = http://localhost:5163
+
+GET {{ModelGen.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
