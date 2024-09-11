@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ModelGen.Domain
 {
-    internal class User
+    public class User : BaseEntity
     {
     }
 }

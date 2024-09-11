@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace ModelGen.Domain;
 
-namespace ModelGen.Domain
+public class Order : BaseEntity
 {
-    internal class Order
-    {
-    }
 }
