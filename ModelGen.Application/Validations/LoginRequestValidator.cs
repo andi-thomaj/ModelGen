@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity.Data;
 
 namespace ModelGen.Application.Validations;
 
-public class LoginRequestValidator : AbstractValidator<LoginRequest>  
+public class LoginRequestValidator : AbstractValidator<LoginRequest>
 {
     public LoginRequestValidator()
     {

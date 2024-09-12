@@ -1,24 +1,24 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\ModelGen.Domain\ModelGen.Domain.csproj" />
-    <ProjectReference Include="..\ModelGen.Shared\ModelGen.Shared.csproj" />
-  </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\ModelGen.Domain\ModelGen.Domain.csproj"/>
+        <ProjectReference Include="..\ModelGen.Shared\ModelGen.Shared.csproj"/>
+    </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Contracts\" />
-    <Folder Include="Models\Responses\" />
-  </ItemGroup>
+    <ItemGroup>
+        <Folder Include="Contracts\"/>
+        <Folder Include="Models\Responses\"/>
+    </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="FluentValidation" Version="11.9.2" />
-    <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="FluentValidation" Version="11.9.2"/>
+        <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0"/>
+    </ItemGroup>
 
 </Project>
