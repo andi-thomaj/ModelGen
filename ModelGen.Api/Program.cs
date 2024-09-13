@@ -1,3 +1,6 @@
+using ModelGen.Application;
+using ModelGen.Infrastructure;
+
 namespace ModelGen.Api;
 
 public class Program
@@ -7,17 +10,19 @@ public class Program
         var builder = WebApplication.CreateBuilder(args);
         var services = builder.Services;
         var configuration = builder.Configuration;
-        // Add services to the container.
 
         services.AddControllers();
-        // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
-
         services.AddRouting(options => { options.LowercaseUrls = true; });
+
+        services
+            .AddInfrastructure(configuration)
+            .AddApplication();
+
+        
         var app = builder.Build();
 
-        // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())
         {
             app.UseSwagger();

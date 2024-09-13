@@ -8,6 +8,10 @@ internal sealed class OrderConfiguration : IEntityTypeConfiguration<Order>
 {
     public void Configure(EntityTypeBuilder<Order> builder)
     {
-        throw new NotImplementedException();
+        builder.HasKey(x => x.Id);
+
+        builder
+            .Property(x => x.Id)
+            .IsRequired();
     }
 }
