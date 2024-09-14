@@ -15,7 +15,12 @@ public class Program
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
         services.AddRouting(options => { options.LowercaseUrls = true; });
-
+        // services.AddAuthentication().AddGoogle(options =>
+        // {
+        //     options.ClientId = configuration["GoogleAuthentication:ClientId"]!;
+        //     options.ClientSecret = configuration["GoogleAuthentication:ClientSecret"]!;
+        // });
+        
         services
             .AddInfrastructure(configuration)
             .AddApplication();
