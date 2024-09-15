@@ -19,4 +19,17 @@ public class UserService(IUserRepository userRepository) : IUserService
             throw;
         }
     }
+
+    public async Task<Result> DeleteUserAsync(string email)
+    {
+        try
+        {
+            return await userRepository.DeleteUserAsync(email);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+    }
 }

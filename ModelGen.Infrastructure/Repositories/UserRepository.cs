@@ -13,10 +13,24 @@ public class UserRepository(ModelGenDbContext dbContext) : IUserRepository
         var userExists = await dbContext.Users.AnyAsync(x => x.Email == user.Email);
         if (userExists)
         {
-            new Result(false, new Error(nameof(CreateUserAsync), $"User: {user.Email} already exists", ErrorType.Conflict));
+            return new Result(false, new Error(nameof(CreateUserAsync), $"User: {user.Email} already exists", ErrorType.Conflict));
         }
         
         dbContext.Users.Add(user);
+        await dbContext.SaveChangesAsync();
+        
+        return new Result(true, Error.None);
+    }
+
+    public async Task<Result> DeleteUserAsync(string email)
+    {
+        var user = await dbContext.Users.FirstOrDefaultAsync(x => x.Email == email);
+        if (user is null)
+        {
+            return new Result(false, new Error(nameof(DeleteUserAsync), $"User: {email} doesn't exist", ErrorType.NotFound));
+        }
+        
+        dbContext.Users.Remove(user);
         await dbContext.SaveChangesAsync();
         
         return new Result(true, Error.None);
