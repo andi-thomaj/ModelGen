@@ -8,6 +8,8 @@ public class User : BaseEntity
     public string Email { get; set; } = string.Empty;
     public int LoginAttempts { get; set; }
     public bool IsBlocked { get; set; }
+    public string GooglePictureUrl { get; set; } = string.Empty;
+    public bool IsGoogleAuthenticated { get; set; }
     public List<Order> Orders { get; set; } = [];
     public List<GeneticData> GeneticData { get; set; } = [];
     public string Theme { get; set; }  = string.Empty;

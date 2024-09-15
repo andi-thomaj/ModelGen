@@ -18,12 +18,12 @@ internal sealed class UserConfiguration : IEntityTypeConfiguration<User>
         builder
             .Property(x => x.MiddleName)
             .HasMaxLength(50)
-            .IsRequired();
+            .IsRequired(false);
         
         builder
             .Property(x => x.LastName)
             .HasMaxLength(50)
-            .IsRequired();
+            .IsRequired(false);
         
         builder
             .Property(x => x.Email)
