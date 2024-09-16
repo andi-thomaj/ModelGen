@@ -21,7 +21,6 @@ public class ModelGenWebApplicationFactory : WebApplicationFactory<Program>
             var connectionString = GetConnectionString();
             services.AddDbContext<ModelGenDbContext>(options => options.UseNpgsql(connectionString));
             
-            // Add the authentication handler
             services.AddAuthentication(defaultScheme: "TestScheme")
                 .AddScheme<AuthenticationSchemeOptions, TestAuthenticationHandler>(
                     "TestScheme", options => { });
