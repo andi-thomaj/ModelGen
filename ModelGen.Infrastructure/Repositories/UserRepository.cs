@@ -31,12 +31,26 @@ public class UserRepository(ModelGenDbContext dbContext) : IUserRepository
         return new Result(true, Error.None);
     }
 
-    public async Task<Result> DeleteUserAsync(string email)
+    public async Task<Result> DeleteUserByEmailAsync(string email)
     {
         var user = await dbContext.Users.FirstOrDefaultAsync(x => x.Email == email);
         if (user is null)
         {
-            return new Result(false, new Error(nameof(DeleteUserAsync), $"User: {email} doesn't exist", ErrorType.NotFound));
+            return new Result(false, new Error(nameof(DeleteUserByEmailAsync), $"User: {email} doesn't exist", ErrorType.NotFound));
+        }
+        
+        dbContext.Users.Remove(user);
+        await dbContext.SaveChangesAsync();
+        
+        return new Result(true, Error.None);
+    }
+    
+    public async Task<Result> DeleteUserByIdAsync(Guid id)
+    {
+        var user = await dbContext.Users.FindAsync(id);
+        if (user is null)
+        {
+            return new Result(false, new Error(nameof(DeleteUserByEmailAsync), $"User: {id} doesn't exist", ErrorType.NotFound));
         }
         
         dbContext.Users.Remove(user);

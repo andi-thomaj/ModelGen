@@ -21,11 +21,24 @@ public class UserService(IUserRepository userRepository) : IUserService
         }
     }
 
-    public async Task<Result> DeleteUserAsync(string email)
+    public async Task<Result> DeleteUserByEmailAsync(string email)
     {
         try
         {
-            return await userRepository.DeleteUserAsync(email);
+            return await userRepository.DeleteUserByEmailAsync(email);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+    }
+    
+    public async Task<Result> DeleteUserByIdAsync(Guid id)
+    {
+        try
+        {
+            return await userRepository.DeleteUserByIdAsync(id);
         }
         catch (Exception e)
         {

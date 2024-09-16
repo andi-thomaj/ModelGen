@@ -7,7 +7,8 @@ namespace ModelGen.Application.Contracts.Persistence;
 public interface IUserRepository
 {
     Task<Result> CreateUserAsync(LoginRequest request);
-    Task<Result> DeleteUserAsync(string email);
+    Task<Result> DeleteUserByEmailAsync(string email);
+    Task<Result> DeleteUserByIdAsync(Guid id);
     Task<Result<UserResponse>> UpdateUserAsync(Guid id, UserUpdateRequest request);
     Task<Result<UserResponse>> GetUserByIdAsync(Guid id);
     Task<Result<UserResponse>> GetUserByEmailAsync(string email);
