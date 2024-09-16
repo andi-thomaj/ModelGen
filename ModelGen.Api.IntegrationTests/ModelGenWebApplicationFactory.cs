@@ -6,7 +6,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using ModelGen.Application.Contracts.Business;
+using ModelGen.Application.Contracts.Persistence;
 using ModelGen.Infrastructure.Database;
+using ModelGen.Infrastructure.Repositories;
+using ModelGen.Infrastructure.Services;
 
 namespace ModelGen.Api.IntegrationTests;
 

@@ -8,7 +8,7 @@ namespace ModelGen.Infrastructure.Services;
 
 public class UserService(IUserRepository userRepository) : IUserService
 {
-    public async Task<Result> CreateUserAsync(LoginRequest request)
+    public async Task<Result<UserResponse>> CreateUserAsync(LoginRequest request)
     {
         try
         {

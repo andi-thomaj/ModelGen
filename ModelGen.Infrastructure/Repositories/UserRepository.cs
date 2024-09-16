@@ -10,12 +10,12 @@ namespace ModelGen.Infrastructure.Repositories;
 
 public class UserRepository(ModelGenDbContext dbContext) : IUserRepository
 {
-    public async Task<Result> CreateUserAsync(LoginRequest request)
+    public async Task<Result<UserResponse>> CreateUserAsync(LoginRequest request)
     {
         var userExists = await dbContext.Users.AnyAsync(x => x.Email == request.Email);
         if (userExists)
         {
-            return new Result(false, new Error(nameof(CreateUserAsync), $"User: {request.Email} already exists", ErrorType.Conflict));
+            return new Result<UserResponse>(null,false, new Error(nameof(CreateUserAsync), $"User: {request.Email} already exists", ErrorType.Conflict));
         }
         
         dbContext.Users.Add(new User
@@ -28,7 +28,17 @@ public class UserRepository(ModelGenDbContext dbContext) : IUserRepository
         });
         await dbContext.SaveChangesAsync();
         
-        return new Result(true, Error.None);
+        var user = dbContext.Users.FirstOrDefault(x => x.Email == request.Email);
+        
+        return new Result<UserResponse>(new UserResponse()
+        {
+            Id = user.Id,
+            Email = user.Email,
+            FirstName = user.FirstName,
+            LastName = user.LastName,
+            MiddleName = user.MiddleName,
+            PictureUrl = user.PictureUrl
+        }, true, Error.None);
     }
 
     public async Task<Result> DeleteUserByEmailAsync(string email)

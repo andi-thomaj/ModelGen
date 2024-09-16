@@ -25,6 +25,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\ModelGen.Api\ModelGen.Api.csproj" />
+      <ProjectReference Include="..\ModelGen.Shared.Tests\ModelGen.Shared.Tests.csproj" />
     </ItemGroup>
 
 </Project>
