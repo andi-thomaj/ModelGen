@@ -9,8 +9,7 @@ public class User : BaseEntity
     public int LoginAttempts { get; set; }
     public bool IsBlocked { get; set; }
     public bool IsDeleted { get; set; }
-    public string GooglePictureUrl { get; set; } = string.Empty;
-    public bool IsGoogleAuthenticated { get; set; }
+    public string PictureUrl { get; set; } = string.Empty;
     public List<Order> Orders { get; set; } = [];
     public List<GeneticData> GeneticData { get; set; } = [];
     public string Theme { get; set; }  = string.Empty;

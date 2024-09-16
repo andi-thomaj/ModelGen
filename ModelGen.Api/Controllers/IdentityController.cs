@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ModelGen.Api.Authentication;
 using ModelGen.Application.Contracts.Business;
+using ModelGen.Application.Models.Requests;
 using ModelGen.Domain;
 
 namespace ModelGen.Api.Controllers;
@@ -14,23 +15,22 @@ public class IdentityController(IAuthenticationService authenticationService,
     public async Task<ActionResult> LoginWithGoogle(string token)
     {
         var payload = await authenticationService.ValidateGoogleTokenAsync(token);
-        User user = new()
+        LoginRequest request = new()
         {
             Email = payload.Email,
             FirstName = payload.GivenName,
             LastName = payload.FamilyName,
-            GooglePictureUrl = payload.Picture,
-            IsGoogleAuthenticated = true
+            PictureUrl = payload.Picture,
         };
         
-        var result = await userService.CreateUserAsync(user);
+        var result = await userService.CreateUserAsync(request);
 
         if (result.IsFailure)
         {
             return BadRequest(result.Error);
         }
 
-        var generatedToken = authenticationService.GenerateToken(user);
+        var generatedToken = authenticationService.GenerateToken(request);
         
         return Ok(generatedToken);
     }

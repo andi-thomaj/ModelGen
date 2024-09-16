@@ -5,6 +5,7 @@ using Google.Apis.Auth;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using ModelGen.Api.Configurations;
+using ModelGen.Application.Models.Requests;
 using ModelGen.Domain;
 
 namespace ModelGen.Api.Authentication;
@@ -13,7 +14,7 @@ public class AuthenticationService(IOptions<JwtSettings> jwtSettings) : IAuthent
 {
     private readonly JwtSettings _jwtSettings = jwtSettings.Value;
     
-    public string GenerateToken(User user)
+    public string GenerateToken(LoginRequest request)
     {
         var handler = new JwtSecurityTokenHandler();
         var key = Encoding.ASCII.GetBytes(_jwtSettings.Key);
@@ -23,7 +24,7 @@ public class AuthenticationService(IOptions<JwtSettings> jwtSettings) : IAuthent
 
         var tokenDescriptor = new SecurityTokenDescriptor
         {
-            Subject = GenerateClaims(user),
+            Subject = GenerateClaims(request),
             Expires = DateTime.UtcNow.AddMinutes(15),
             SigningCredentials = credentials,
         };
@@ -35,10 +36,10 @@ public class AuthenticationService(IOptions<JwtSettings> jwtSettings) : IAuthent
     public async Task<GoogleJsonWebSignature.Payload> ValidateGoogleTokenAsync(string token)
         => await GoogleJsonWebSignature.ValidateAsync(token);
 
-    private static ClaimsIdentity GenerateClaims(User user)
+    private static ClaimsIdentity GenerateClaims(LoginRequest request)
     {
         var claims = new ClaimsIdentity();
-        claims.AddClaim(new Claim(ClaimTypes.Name, user.Email));
+        claims.AddClaim(new Claim(ClaimTypes.Name, request.Email));
 
         return claims;
     }
