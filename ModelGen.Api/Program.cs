@@ -6,12 +6,13 @@ using ModelGen.Api.Authentication;
 using ModelGen.Api.Configurations;
 using ModelGen.Application;
 using ModelGen.Infrastructure;
+using ModelGen.Infrastructure.Database;
 
 namespace ModelGen.Api;
 
 public class Program
 {
-    public static void Main(string[] args)
+    public static async Task Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
         var services = builder.Services;
@@ -85,6 +86,7 @@ public class Program
         
         var app = builder.Build();
 
+        await app.Services.InitializeDbAsync();
         if (app.Environment.IsDevelopment())
         {
             app.UseSwagger();
