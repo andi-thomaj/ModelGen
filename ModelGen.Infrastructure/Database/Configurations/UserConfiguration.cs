@@ -33,10 +33,9 @@ internal sealed class UserConfiguration : IEntityTypeConfiguration<User>
         builder
             .HasMany(x => x.Orders)
             .WithOne(x => x.User);
-        
+
         builder
             .HasMany(x => x.GeneticData)
-            .WithMany(x => x.Users)
-            .UsingEntity(x => x.ToTable("GeneticDataUsers"));
+            .WithOne(x => x.User);
     }
 }

@@ -14,14 +14,18 @@
           <PrivateAssets>all</PrivateAssets>
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.8">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\ModelGen.Application\ModelGen.Application.csproj"/>
-        <ProjectReference Include="..\ModelGen.Domain\ModelGen.Domain.csproj"/>
-        <ProjectReference Include="..\ModelGen.Infrastructure\ModelGen.Infrastructure.csproj"/>
-        <ProjectReference Include="..\ModelGen.Shared\ModelGen.Shared.csproj"/>
+        <ProjectReference Include="..\ModelGen.Application\ModelGen.Application.csproj" />
+        <ProjectReference Include="..\ModelGen.Domain\ModelGen.Domain.csproj" />
+        <ProjectReference Include="..\ModelGen.Infrastructure\ModelGen.Infrastructure.csproj" />
+        <ProjectReference Include="..\ModelGen.Shared\ModelGen.Shared.csproj" />
     </ItemGroup>
 
 </Project>
