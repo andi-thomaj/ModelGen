@@ -6,7 +6,8 @@ public class GeneticData : BaseEntity
     public string G25Coordinates { get; set; } = string.Empty;
     public string PaternalHaplogroup { get; set; } = string.Empty;
     public string MaternalHaplogroup { get; set; } = string.Empty;
-    public Guid OrderId { get; set; }
-    public Order Order { get; set; }
-    public List<User> Users { get; set; } = [];
+    public Guid? OrderId { get; set; }
+    public Order? Order { get; set; }
+    public Guid UserId { get; set;}
+    public User User { get; set; }
 }

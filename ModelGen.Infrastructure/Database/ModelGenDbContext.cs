@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+//using Microsoft.EntityFrameworkCore.ChangeTracking;
 using ModelGen.Domain;
 
 namespace ModelGen.Infrastructure.Database;
@@ -14,3 +15,4 @@ public class ModelGenDbContext(DbContextOptions<ModelGenDbContext> options) : Db
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(ModelGenDbContext).Assembly);
     }
 }
+
