@@ -13,7 +13,7 @@ public static class TestDataHelper
         .RuleFor(x => x.LastName, f => f.Person.LastName)
         .RuleFor(x => x.PictureUrl, f => f.Internet.Avatar())
         .RuleFor(x => x.Theme, f => f.Commerce.ProductName());
-    
+
     public static DataGenerator DataGenerator = new DataGenerator()
         .AddInstanceGenerator(() => _userFaker.Generate());
 }

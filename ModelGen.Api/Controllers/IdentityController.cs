@@ -3,7 +3,6 @@ using ModelGen.Api.Authentication;
 using ModelGen.Application.Contracts.Business;
 using ModelGen.Application.Models.Requests;
 using ModelGen.Application.Models.Responses;
-using ModelGen.Domain;
 
 namespace ModelGen.Api.Controllers;
 

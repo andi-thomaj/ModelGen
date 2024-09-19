@@ -6,5 +6,5 @@ namespace ModelGen.Api.Controllers;
 [Route("api/[controller]")]
 public class OrdersController : ControllerBase
 {
-    
+
 }

@@ -29,7 +29,7 @@ public class IntegrationTestWebApplicationFactory : WebApplicationFactory<Progra
             {
                 services.Remove(descriptor);
             }
-            
+
             services.AddDbContext<ModelGenDbContext>(options => options
                 .UseNpgsql(_dbContainer.GetConnectionString()));
 

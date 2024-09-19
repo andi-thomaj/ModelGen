@@ -1,9 +1,9 @@
-﻿using System.Net.Http.Json;
-using FluentAssertions;
+﻿using FluentAssertions;
 using ModelGen.Application.Models.Requests;
 using ModelGen.Application.Models.Responses;
 using ModelGen.Domain;
 using ModelGen.Shared.Tests.DataGeneration;
+using System.Net.Http.Json;
 
 namespace ModelGen.Api.IntegrationTests;
 
@@ -20,7 +20,7 @@ public class UserControllerTests(IntegrationTestWebApplicationFactory factory) :
 
         var response = await client.GetAsync($"/api/user/{user.Id}");
         var userResponse = await response.Content.ReadFromJsonAsync<UserResponse>();
-        
+
         userResponse.Should().NotBeNull();
         userResponse!.Id.Should().Be(user.Id);
         userResponse.FirstName.Should().Be(user.FirstName);

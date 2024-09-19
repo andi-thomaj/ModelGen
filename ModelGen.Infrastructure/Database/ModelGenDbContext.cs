@@ -9,7 +9,7 @@ public class ModelGenDbContext(DbContextOptions<ModelGenDbContext> options) : Db
     public DbSet<GeneticData> GeneticData { get; set; }
     public DbSet<Order> Orders { get; set; }
     public DbSet<User> Users { get; set; }
-    
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(ModelGenDbContext).Assembly);

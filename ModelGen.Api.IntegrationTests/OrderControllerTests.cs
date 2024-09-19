@@ -1,5 +1,3 @@
-using System.Net.Http.Json;
-
 namespace ModelGen.Api.IntegrationTests;
 
 public class OrderControllerTests(IntegrationTestWebApplicationFactory factory) : BaseIntegrationTest(factory)
@@ -8,13 +6,13 @@ public class OrderControllerTests(IntegrationTestWebApplicationFactory factory) 
     public async Task GetOrder()
     {
         var application = new IntegrationTestWebApplicationFactory();
-        
-        
-        
+
+
+
         var client = application.CreateClient();
-        
+
         var response = await client.GetAsync("/api/order");
-        
+
         response.EnsureSuccessStatusCode();
 
         //var deserializedResponse = await response.Content.ReadFromJsonAsync();

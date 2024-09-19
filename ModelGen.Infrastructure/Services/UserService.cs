@@ -33,7 +33,7 @@ public class UserService(IUserRepository userRepository) : IUserService
             throw;
         }
     }
-    
+
     public async Task<Result> DeleteUserByIdAsync(Guid id)
     {
         try

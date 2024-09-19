@@ -14,7 +14,7 @@ public class UserController(IUserService userService) : ControllerBase
     public async Task<ActionResult<UserResponse>> GetUserByEmailAsync([FromQuery] string email)
     {
         var result = await userService.GetUserByEmailAsync(email);
-        
+
         return result switch
         {
             { IsFailure: true, Error.Type: ErrorType.NotFound } => NotFound(result.Error.Description),
@@ -35,7 +35,7 @@ public class UserController(IUserService userService) : ControllerBase
             _ => result.Value
         };
     }
-    
+
     [HttpPut("{id}")]
     public async Task<ActionResult<UserResponse>> UpdateUserAsync(Guid id, UserUpdateRequest request)
     {
@@ -48,9 +48,9 @@ public class UserController(IUserService userService) : ControllerBase
             _ => result.Value
         };
     }
-    
+
     [HttpDelete]
-    public async Task<ActionResult> DeleteUserByEmailAsync([FromQuery]string email)
+    public async Task<ActionResult> DeleteUserByEmailAsync([FromQuery] string email)
     {
         var result = await userService.DeleteUserByEmailAsync(email);
 
@@ -60,7 +60,7 @@ public class UserController(IUserService userService) : ControllerBase
             _ => Ok()
         };
     }
-    
+
     [HttpDelete("{id}")]
     public async Task<ActionResult> DeleteUserByIdAsync(Guid id)
     {
@@ -72,5 +72,5 @@ public class UserController(IUserService userService) : ControllerBase
             _ => Ok()
         };
     }
-    
+
 }

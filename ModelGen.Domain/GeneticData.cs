@@ -8,6 +8,6 @@ public class GeneticData : BaseEntity
     public string MaternalHaplogroup { get; set; } = string.Empty;
     public Guid? OrderId { get; set; }
     public Order? Order { get; set; }
-    public Guid UserId { get; set;}
+    public Guid UserId { get; set; }
     public User User { get; set; }
 }

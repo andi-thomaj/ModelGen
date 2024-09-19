@@ -9,7 +9,7 @@ internal sealed class GeneticDataConfiguration : IEntityTypeConfiguration<Geneti
     public void Configure(EntityTypeBuilder<GeneticData> builder)
     {
         builder.HasKey(x => x.Id);
-        
+
         builder
             .Property(x => x.RawData)
             .IsRequired();

@@ -1,19 +1,18 @@
-﻿using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
-using Google.Apis.Auth;
+﻿using Google.Apis.Auth;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using ModelGen.Api.Configurations;
 using ModelGen.Application.Models.Requests;
-using ModelGen.Domain;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
 namespace ModelGen.Api.Authentication;
 
 public class AuthenticationService(IOptions<JwtSettings> jwtSettings) : IAuthenticationService
 {
     private readonly JwtSettings _jwtSettings = jwtSettings.Value;
-    
+
     public string GenerateToken(LoginRequest request)
     {
         var handler = new JwtSecurityTokenHandler();

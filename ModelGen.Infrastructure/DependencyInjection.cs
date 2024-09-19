@@ -28,18 +28,18 @@ public static class DependencyInjection
 
         return services;
     }
-    
+
     private static IServiceCollection AddServicesAndRepositories(this IServiceCollection services)
     {
         services.AddTransient<IGeneticDataService, GeneticDataService>();
         services.AddTransient<IGeneticDataRepository, GeneticDataRepository>();
-        
+
         services.AddTransient<IOrderService, OrderService>();
         services.AddTransient<IOrderRepository, OrderRepository>();
-        
+
         services.AddTransient<IUserService, UserService>();
         services.AddTransient<IUserRepository, UserRepository>();
-        
+
         return services;
     }
 }

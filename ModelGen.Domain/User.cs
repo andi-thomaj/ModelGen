@@ -12,5 +12,5 @@ public class User : BaseEntity
     public string PictureUrl { get; set; } = string.Empty;
     public List<Order> Orders { get; set; } = [];
     public List<GeneticData> GeneticData { get; set; } = [];
-    public string Theme { get; set; }  = string.Empty;
+    public string Theme { get; set; } = string.Empty;
 }

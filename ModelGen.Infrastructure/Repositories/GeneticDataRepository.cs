@@ -11,7 +11,7 @@ public class GeneticDataRepository(ModelGenDbContext dbContext) : IGeneticDataRe
     {
         var geneticData = await dbContext.GeneticData.FindAsync(id);
 
-        if(geneticData is null)
+        if (geneticData is null)
         {
             return new Result<GeneticDataResponse>(null, false, new Error(nameof(GetGeneticDataByIdAsync), $"Genetic data with id: {id} doesn't exist", ErrorType.NotFound));
         }

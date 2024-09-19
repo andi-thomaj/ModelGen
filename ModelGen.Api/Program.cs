@@ -1,4 +1,3 @@
-using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -7,6 +6,7 @@ using ModelGen.Api.Configurations;
 using ModelGen.Application;
 using ModelGen.Infrastructure;
 using ModelGen.Infrastructure.Database;
+using System.Text;
 
 namespace ModelGen.Api;
 
@@ -20,12 +20,12 @@ public class Program
 
         JwtSettings jwtSettings = new();
         configuration.GetSection(JwtSettings.SectionName).Bind(jwtSettings);
-        
+
         services.AddOptions<JwtSettings>()
             .Bind(configuration.GetSection(JwtSettings.SectionName))
             .ValidateDataAnnotations()
             .ValidateOnStart();
-        
+
         services.AddControllers();
         services.AddEndpointsApiExplorer();
         services.AddTransient<IAuthenticationService, AuthenticationService>();
@@ -79,11 +79,11 @@ public class Program
                 };
             });
         services.AddAuthorization();
-        
+
         services
             .AddInfrastructure(configuration)
             .AddApplication();
-        
+
         var app = builder.Build();
 
         await app.Services.InitializeDbAsync();
