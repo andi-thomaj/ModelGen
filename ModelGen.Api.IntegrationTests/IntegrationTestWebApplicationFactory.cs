@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ModelGen.Infrastructure.Database;
 using Testcontainers.PostgreSql;
@@ -18,6 +17,7 @@ public class IntegrationTestWebApplicationFactory : WebApplicationFactory<Progra
         .WithUsername("postgres")
         .WithPassword("postgres")
         .Build();
+
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
         builder.ConfigureTestServices(services =>
@@ -30,7 +30,6 @@ public class IntegrationTestWebApplicationFactory : WebApplicationFactory<Progra
                 services.Remove(descriptor);
             }
             
-            var connectionString = GetConnectionString();
             services.AddDbContext<ModelGenDbContext>(options => options
                 .UseNpgsql(_dbContainer.GetConnectionString()));
 
@@ -38,17 +37,6 @@ public class IntegrationTestWebApplicationFactory : WebApplicationFactory<Progra
                 .AddScheme<AuthenticationSchemeOptions, TestAuthenticationHandler>(
                     "TestScheme", options => { });
         });
-    }
-
-    private static string? GetConnectionString()
-    {
-        var configuration = new ConfigurationBuilder()
-            .AddUserSecrets<IntegrationTestWebApplicationFactory>()
-            .Build();
-        
-        var connectionString = configuration.GetConnectionString("DefaultConnection");
-        
-        return connectionString;
     }
 
     public Task InitializeAsync()

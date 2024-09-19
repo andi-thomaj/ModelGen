@@ -11,8 +11,8 @@ public abstract class BaseIntegrationTest : IClassFixture<IntegrationTestWebAppl
     protected readonly IUserService UserService;
     protected readonly ModelGenDbContext DbContext;
     protected readonly IntegrationTestWebApplicationFactory Factory;
-    
-    public BaseIntegrationTest(IntegrationTestWebApplicationFactory factory)
+
+    private protected BaseIntegrationTest(IntegrationTestWebApplicationFactory factory)
     {
         Factory = factory;
         _scope = Factory.Services.CreateScope();
