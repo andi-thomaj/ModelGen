@@ -3,23 +3,25 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35303.130
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelGen.Api", "ModelGen.Api\ModelGen.Api.csproj", "{0B9B4A66-393A-4C03-A3D4-9901264CB515}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModelGen.Api", "ModelGen.Api\ModelGen.Api.csproj", "{0B9B4A66-393A-4C03-A3D4-9901264CB515}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{BEBACDC2-294D-453D-86A9-6ACBF3FF8615}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{3C4BD15F-4D46-46AA-89CB-B052F3CEBAC5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelGen.Infrastructure", "ModelGen.Infrastructure\ModelGen.Infrastructure.csproj", "{33EEFD98-E671-440C-BF8E-5844202166BF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModelGen.Infrastructure", "ModelGen.Infrastructure\ModelGen.Infrastructure.csproj", "{33EEFD98-E671-440C-BF8E-5844202166BF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelGen.Application", "ModelGen.Application\ModelGen.Application.csproj", "{D071C389-1B5E-4B00-8B98-B004818F86B3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModelGen.Application", "ModelGen.Application\ModelGen.Application.csproj", "{D071C389-1B5E-4B00-8B98-B004818F86B3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelGen.Domain", "ModelGen.Domain\ModelGen.Domain.csproj", "{63E2A8D4-FFA6-4FFB-B828-95EC62D8DCBF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModelGen.Domain", "ModelGen.Domain\ModelGen.Domain.csproj", "{63E2A8D4-FFA6-4FFB-B828-95EC62D8DCBF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelGen.Shared", "ModelGen.Shared\ModelGen.Shared.csproj", "{53D39418-5DE1-4B4B-8063-058486FBF97D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModelGen.Shared", "ModelGen.Shared\ModelGen.Shared.csproj", "{53D39418-5DE1-4B4B-8063-058486FBF97D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelGen.Api.IntegrationTests", "ModelGen.Api.IntegrationTests\ModelGen.Api.IntegrationTests.csproj", "{69336AFB-187B-49D8-935C-96A76ADBCD84}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModelGen.Api.IntegrationTests", "ModelGen.Api.IntegrationTests\ModelGen.Api.IntegrationTests.csproj", "{69336AFB-187B-49D8-935C-96A76ADBCD84}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelGen.Shared.Tests", "ModelGen.Shared.Tests\ModelGen.Shared.Tests.csproj", "{E74096D8-4748-42CB-9B05-792071EDA98F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModelGen.Shared.Tests", "ModelGen.Shared.Tests\ModelGen.Shared.Tests.csproj", "{E74096D8-4748-42CB-9B05-792071EDA98F}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{A45EEB44-6B19-403A-9C7A-0080FFB3920B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,6 +57,10 @@ Global
 		{E74096D8-4748-42CB-9B05-792071EDA98F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E74096D8-4748-42CB-9B05-792071EDA98F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E74096D8-4748-42CB-9B05-792071EDA98F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A45EEB44-6B19-403A-9C7A-0080FFB3920B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A45EEB44-6B19-403A-9C7A-0080FFB3920B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A45EEB44-6B19-403A-9C7A-0080FFB3920B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A45EEB44-6B19-403A-9C7A-0080FFB3920B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

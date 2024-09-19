@@ -5,40 +5,45 @@ using Microsoft.AspNetCore.TestHost;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
-using ModelGen.Application.Contracts.Business;
-using ModelGen.Application.Contracts.Persistence;
 using ModelGen.Infrastructure.Database;
-using ModelGen.Infrastructure.Repositories;
-using ModelGen.Infrastructure.Services;
+using Testcontainers.PostgreSql;
 
 namespace ModelGen.Api.IntegrationTests;
 
-public class ModelGenWebApplicationFactory : WebApplicationFactory<Program>
+public class IntegrationTestWebApplicationFactory : WebApplicationFactory<Program>, IAsyncLifetime
 {
+    private readonly PostgreSqlContainer _dbContainer = new PostgreSqlBuilder()
+        .WithImage("postgres:latest")
+        .WithDatabase("modelgen")
+        .WithUsername("postgres")
+        .WithPassword("postgres")
+        .Build();
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
         builder.ConfigureTestServices(services =>
         {
-            services.RemoveAll(typeof(DbContextOptions<ModelGenDbContext>));
+            var descriptor = services
+                .SingleOrDefault(x => x.ServiceType == typeof(DbContextOptions<ModelGenDbContext>));
+
+            if (descriptor is not null)
+            {
+                services.Remove(descriptor);
+            }
             
             var connectionString = GetConnectionString();
-            services.AddDbContext<ModelGenDbContext>(options => options.UseNpgsql(connectionString));
-            
+            services.AddDbContext<ModelGenDbContext>(options => options
+                .UseNpgsql(_dbContainer.GetConnectionString()));
+
             services.AddAuthentication(defaultScheme: "TestScheme")
                 .AddScheme<AuthenticationSchemeOptions, TestAuthenticationHandler>(
                     "TestScheme", options => { });
-            
-            var dbContext = CreateDbContext(services);
-            dbContext.Database.EnsureDeleted();
-            
         });
     }
 
     private static string? GetConnectionString()
     {
         var configuration = new ConfigurationBuilder()
-            .AddUserSecrets<ModelGenWebApplicationFactory>()
+            .AddUserSecrets<IntegrationTestWebApplicationFactory>()
             .Build();
         
         var connectionString = configuration.GetConnectionString("DefaultConnection");
@@ -46,11 +51,13 @@ public class ModelGenWebApplicationFactory : WebApplicationFactory<Program>
         return connectionString;
     }
 
-    private static ModelGenDbContext CreateDbContext(IServiceCollection services)
+    public Task InitializeAsync()
     {
-        var serviceProvider = services.BuildServiceProvider();
-        var scope = serviceProvider.CreateScope();
-        var dbContext = scope.ServiceProvider.GetRequiredService<ModelGenDbContext>();
-        return dbContext;
+        return _dbContainer.StartAsync();
+    }
+
+    public new Task DisposeAsync()
+    {
+        return _dbContainer.StopAsync();
     }
 }

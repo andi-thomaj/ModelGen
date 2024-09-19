@@ -1,0 +1,22 @@
+services:
+  modelgen.api:
+    image: ${DOCKER_REGISTRY-}modelgenapi
+    container_name: modelgen.api
+    build:
+      context: .
+      dockerfile: ModelGen.Api/Dockerfile
+    ports:
+        - "5000:5000"
+        - "5001:5001"
+
+  modelgen.database:
+    image: postgres:latest
+    container_name: modelgen.database
+    environment:
+        - POSTGRES_DB=modelgen
+        - POSTGRES_USER=postgres
+        - POSTGRES_PASSWORD=postgres 
+    volumes:
+        - ./.containers/products-db:/var/lib/postgresql/data
+    ports:
+        - 5432:5432

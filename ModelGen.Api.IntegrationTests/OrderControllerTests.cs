@@ -2,12 +2,12 @@ using System.Net.Http.Json;
 
 namespace ModelGen.Api.IntegrationTests;
 
-public class OrderControllerTests
+public class OrderControllerTests(IntegrationTestWebApplicationFactory factory) : BaseIntegrationTest(factory)
 {
     [Fact]
     public async Task GetOrder()
     {
-        var application = new ModelGenWebApplicationFactory();
+        var application = new IntegrationTestWebApplicationFactory();
         
         
         
