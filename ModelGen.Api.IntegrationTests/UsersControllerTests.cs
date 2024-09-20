@@ -7,7 +7,7 @@ using System.Net.Http.Json;
 
 namespace ModelGen.Api.IntegrationTests;
 
-public class UserControllerTests(IntegrationTestWebApplicationFactory factory) : BaseIntegrationTest(factory)
+public class UsersControllerTests(IntegrationTestWebApplicationFactory factory) : BaseIntegrationTest(factory)
 {
     [Fact]
     public async Task GetById_ShouldReturnUser_WhenUserExists()
@@ -18,7 +18,7 @@ public class UserControllerTests(IntegrationTestWebApplicationFactory factory) :
         var user = userResult.Value;
         var client = Factory.CreateClient();
 
-        var response = await client.GetAsync($"/api/user/{user.Id}");
+        var response = await client.GetAsync($"/api/users/{user.Id}");
         var userResponse = await response.Content.ReadFromJsonAsync<UserResponse>();
 
         userResponse.Should().NotBeNull();
@@ -39,7 +39,7 @@ public class UserControllerTests(IntegrationTestWebApplicationFactory factory) :
         var user = userResult.Value;
         var client = Factory.CreateClient();
 
-        var response = await client.GetAsync($"/api/user?email={generatedUser.Email}");
+        var response = await client.GetAsync($"/api/users?email={generatedUser.Email}");
         var userResponse = await response.Content.ReadFromJsonAsync<UserResponse>();
 
         userResponse.Should().NotBeNull();
@@ -65,7 +65,7 @@ public class UserControllerTests(IntegrationTestWebApplicationFactory factory) :
         var request =
             new UserUpdateRequest(user.FirstName, user.MiddleName, user.LastName, updatedTheme, user.PictureUrl);
 
-        var response = await client.PutAsJsonAsync($"/api/user/{user.Id}", request);
+        var response = await client.PutAsJsonAsync($"/api/users/{user.Id}", request);
         var userResponse = await response.Content.ReadFromJsonAsync<UserResponse>();
 
         userResponse.Should().NotBeNull();

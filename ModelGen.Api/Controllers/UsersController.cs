@@ -8,7 +8,7 @@ namespace ModelGen.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class UserController(IUserService userService) : ControllerBase
+public class UsersController(IUserService userService) : ControllerBase
 {
     [HttpGet]
     public async Task<ActionResult<UserResponse>> GetUserByEmailAsync([FromQuery] string email)
