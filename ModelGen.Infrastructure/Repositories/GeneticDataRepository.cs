@@ -1,11 +1,13 @@
 ﻿using ModelGen.Application.Contracts.Persistence;
+using ModelGen.Application.Models.Requests;
 using ModelGen.Application.Models.Responses;
+using ModelGen.Domain;
 using ModelGen.Infrastructure.Database;
 using ModelGen.Shared;
 
 namespace ModelGen.Infrastructure.Repositories;
 
-public class GeneticDataRepository(ModelGenDbContext dbContext) : IGeneticDataRepository
+public class GeneticDataRepository(IUserRepository userRepository, ModelGenDbContext dbContext) : IGeneticDataRepository
 {
     public async Task<Result<GeneticDataResponse>> GetGeneticDataByIdAsync(Guid id)
     {
@@ -22,5 +24,42 @@ public class GeneticDataRepository(ModelGenDbContext dbContext) : IGeneticDataRe
             MaternalHaplogroup = geneticData.MaternalHaplogroup,
             PaternalHaplogroup = geneticData.PaternalHaplogroup
         }, true, Error.None);
+    }
+
+    public async Task<Result> UploadGeneticDataFileAsync(UploadGeneticDataFileRequest request)
+    {
+        var userResult = await userRepository.GetUserByIdAsync(request.UserId);
+
+        if (userResult.IsFailure)
+        {
+            return new Result(false,
+                new Error(nameof(UploadGeneticDataFileAsync), $"User with ID: {request.UserId} was not found",
+                    ErrorType.NotFound));
+        }
+
+        List<GeneticData> geneticData = [];
+        foreach (var data in request.Files.Files)
+        {
+            byte[] fileBytes;
+            await using (var stream = data.OpenReadStream())
+            {
+                await using MemoryStream memoryStream = new();
+                await stream.CopyToAsync(memoryStream);
+                fileBytes = memoryStream.ToArray();
+            }
+
+            geneticData.Add(new GeneticData
+            {
+                RawData = fileBytes,
+                RawDataFileName = data.FileName,
+                UserId = request.UserId,
+                UploadedAt = DateTimeOffset.UtcNow
+            });
+        }
+
+        await dbContext.GeneticData.AddRangeAsync(geneticData);
+        await dbContext.SaveChangesAsync();
+
+        return new Result(true, Error.None);
     }
 }

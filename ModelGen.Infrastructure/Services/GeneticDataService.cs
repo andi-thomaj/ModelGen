@@ -1,5 +1,6 @@
 ﻿using ModelGen.Application.Contracts.Business;
 using ModelGen.Application.Contracts.Persistence;
+using ModelGen.Application.Models.Requests;
 using ModelGen.Application.Models.Responses;
 using ModelGen.Shared;
 
@@ -13,6 +14,19 @@ public class GeneticDataService(IGeneticDataRepository geneticDataRepository) : 
         {
             return await geneticDataRepository.GetGeneticDataByIdAsync(id);
 
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+    }
+
+    public async Task<Result> UploadGeneticDataFileAsync(UploadGeneticDataFileRequest request)
+    {
+        try
+        {
+            return await geneticDataRepository.UploadGeneticDataFileAsync(request);
         }
         catch (Exception e)
         {
