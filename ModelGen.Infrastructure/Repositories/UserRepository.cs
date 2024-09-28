@@ -12,10 +12,18 @@ public class UserRepository(ModelGenDbContext dbContext) : IUserRepository
 {
     public async Task<Result<UserResponse>> CreateUserAsync(LoginRequest request)
     {
-        var userExists = await dbContext.Users.AnyAsync(x => x.Email == request.Email);
-        if (userExists)
+        var user = await dbContext.Users.FirstOrDefaultAsync(x => x.Email == request.Email);
+        if (user is not null)
         {
-            return new Result<UserResponse>(null, false, new Error(nameof(CreateUserAsync), $"User: {request.Email} already exists", ErrorType.Conflict));
+            return new Result<UserResponse>(new UserResponse
+            {
+                Id = user.Id,
+                Email = user.Email,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                MiddleName = user.MiddleName,
+                PictureUrl = user.PictureUrl
+            }, true, Error.None);
         }
 
         dbContext.Users.Add(new User
@@ -28,9 +36,8 @@ public class UserRepository(ModelGenDbContext dbContext) : IUserRepository
         });
         await dbContext.SaveChangesAsync();
 
-        var user = dbContext.Users.FirstOrDefault(x => x.Email == request.Email);
-
-        return new Result<UserResponse>(new UserResponse()
+        user = await dbContext.Users.FirstOrDefaultAsync(x => x.Email == request.Email);
+        return new Result<UserResponse>(new UserResponse
         {
             Id = user.Id,
             Email = user.Email,

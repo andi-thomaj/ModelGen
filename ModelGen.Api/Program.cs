@@ -26,6 +26,17 @@ public class Program
             .ValidateDataAnnotations()
             .ValidateOnStart();
 
+        var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+        services.AddCors(options =>
+        {
+            options.AddPolicy(name: MyAllowSpecificOrigins,
+                policy =>
+                {
+                    policy.AllowAnyOrigin()
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                });
+        });
         services.AddControllers();
         services.AddEndpointsApiExplorer();
         services.AddTransient<IAuthenticationService, AuthenticationService>();
@@ -93,8 +104,9 @@ public class Program
             app.UseSwaggerUI();
         }
 
-        app.UseHttpsRedirection();
-
+        //app.UseHttpsRedirection();
+        app.UseCors(MyAllowSpecificOrigins);
+        app.UseAuthentication();
         app.UseAuthorization();
 
 
