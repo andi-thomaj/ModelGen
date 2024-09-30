@@ -12,7 +12,8 @@ public static class TestDataHelper
         .RuleFor(x => x.MiddleName, f => f.Person.LastName)
         .RuleFor(x => x.LastName, f => f.Person.LastName)
         .RuleFor(x => x.PictureUrl, f => f.Internet.Avatar())
-        .RuleFor(x => x.Theme, f => f.Commerce.ProductName());
+        .RuleFor(x => x.Theme, f => f.Commerce.ProductName())
+        .RuleFor(x => x.Jwt, f => f.Internet.IpAddress().ToString());
 
     public static DataGenerator DataGenerator = new DataGenerator()
         .AddInstanceGenerator(() => _userFaker.Generate());

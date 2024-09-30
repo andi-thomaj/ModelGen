@@ -72,5 +72,4 @@ public class UsersController(IUserService userService) : ControllerBase
             _ => Ok()
         };
     }
-
 }

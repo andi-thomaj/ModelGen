@@ -15,4 +15,3 @@ public class ModelGenDbContext(DbContextOptions<ModelGenDbContext> options) : Db
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(ModelGenDbContext).Assembly);
     }
 }
-

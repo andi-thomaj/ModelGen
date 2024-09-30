@@ -1,0 +1,3 @@
+dotnet ef migrations add newcols --project ModelGen.Infrastructure --startup-project ModelGen.Api
+
+dotnet ef database update --project ModelGen.Infrastructure --startup-project ModelGen.Api

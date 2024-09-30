@@ -31,6 +31,34 @@ internal sealed class UserConfiguration : IEntityTypeConfiguration<User>
             .IsRequired();
 
         builder
+            .Property(x => x.LoginAttempts)
+            .IsRequired();
+
+        builder
+            .Property(x => x.IsBlocked)
+            .IsRequired();
+
+        builder
+            .Property(x => x.IsDeleted)
+            .IsRequired();
+
+        builder
+            .Property(x => x.PictureUrl)
+            .IsRequired();
+
+        builder
+            .Property(x => x.GoogleIdToken)
+            .IsRequired(false);
+
+        builder
+            .Property(x => x.Jwt)
+            .IsRequired(false);
+
+        builder
+            .Property(x => x.JwtRefresh)
+            .IsRequired(false);
+
+        builder
             .HasMany(x => x.Orders)
             .WithOne(x => x.User);
 

@@ -15,7 +15,9 @@ public class GeneticDataRepository(IUserRepository userRepository, ModelGenDbCon
 
         if (geneticData is null)
         {
-            return new Result<GeneticDataResponse>(null, false, new Error(nameof(GetGeneticDataByIdAsync), $"Genetic data with id: {id} doesn't exist", ErrorType.NotFound));
+            return new Result<GeneticDataResponse>(null, false,
+                new Error(nameof(GetGeneticDataByIdAsync), $"Genetic data with id: {id} doesn't exist",
+                    ErrorType.NotFound));
         }
 
         return new Result<GeneticDataResponse>(new GeneticDataResponse

@@ -38,5 +38,4 @@ public class GeneticDataController(IGeneticDataService geneticDataService) : Con
             _ => Created()
         };
     }
-
 }

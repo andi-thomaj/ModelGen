@@ -13,7 +13,7 @@ public class AuthenticationService(IOptions<JwtSettings> jwtSettings) : IAuthent
 {
     private readonly JwtSettings _jwtSettings = jwtSettings.Value;
 
-    public string GenerateToken(LoginRequest request)
+    public string GenerateToken(string email)
     {
         var handler = new JwtSecurityTokenHandler();
         var key = Encoding.ASCII.GetBytes(_jwtSettings.Key);
@@ -23,7 +23,7 @@ public class AuthenticationService(IOptions<JwtSettings> jwtSettings) : IAuthent
 
         var tokenDescriptor = new SecurityTokenDescriptor
         {
-            Subject = GenerateClaims(request),
+            Subject = GenerateClaims(email),
             Expires = DateTime.UtcNow.AddMinutes(15),
             SigningCredentials = credentials,
         };
@@ -35,10 +35,10 @@ public class AuthenticationService(IOptions<JwtSettings> jwtSettings) : IAuthent
     public async Task<GoogleJsonWebSignature.Payload> ValidateGoogleTokenAsync(string token)
         => await GoogleJsonWebSignature.ValidateAsync(token);
 
-    private static ClaimsIdentity GenerateClaims(LoginRequest request)
+    private static ClaimsIdentity GenerateClaims(string email)
     {
         var claims = new ClaimsIdentity();
-        claims.AddClaim(new Claim(ClaimTypes.Name, request.Email));
+        claims.AddClaim(new Claim(ClaimTypes.Name, email));
 
         return claims;
     }

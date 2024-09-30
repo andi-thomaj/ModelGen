@@ -1,12 +1,16 @@
 ﻿namespace ModelGen.Application.Models.Responses;
 
-public class UserResponse
-{
-    public Guid Id { get; set; }
-    public string FirstName { get; set; } = string.Empty;
-    public string MiddleName { get; set; } = string.Empty;
-    public string LastName { get; set; } = string.Empty;
-    public string Email { get; set; } = string.Empty;
-    public string Theme { get; set; } = string.Empty;
-    public string PictureUrl { get; set; } = string.Empty;
-}
+public record UserResponse(
+    Guid Id,
+    string FirstName,
+    string MiddleName,
+    string LastName,
+    string Email,
+    string Theme,
+    string PictureUrl,
+    string GoogleIdToken,
+    string Jwt,
+    string JwtRefresh,
+    int LoginAttempts,
+    bool IsBlocked,
+    bool IsDeleted);

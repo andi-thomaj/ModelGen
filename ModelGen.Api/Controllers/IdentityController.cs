@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using ModelGen.Api.Authentication;
 using ModelGen.Application.Contracts.Business;
 using ModelGen.Application.Models.Requests;
@@ -18,7 +17,9 @@ public class IdentityController(
     public async Task<ActionResult<UserResponse>> LoginWithGoogle([FromBody] LoginWithGoogleRequest request)
     {
         var payload = await authenticationService.ValidateGoogleTokenAsync(request.Token);
-        LoginRequest loginRequest = new(payload.GivenName, payload.FamilyName, payload.Email, "Dark", payload.Picture);
+        var jwt = authenticationService.GenerateToken(payload.Email);
+        LoginRequest loginRequest = new(payload.GivenName, payload.FamilyName, payload.Email, "Dark", payload.Picture,
+            request.Token, jwt);
 
         var result = await userService.CreateUserAsync(loginRequest);
 

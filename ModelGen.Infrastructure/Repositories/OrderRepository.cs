@@ -4,5 +4,4 @@ namespace ModelGen.Infrastructure.Repositories;
 
 public class OrderRepository : IOrderRepository
 {
-
 }

@@ -13,7 +13,6 @@ public class GeneticDataService(IGeneticDataRepository geneticDataRepository) : 
         try
         {
             return await geneticDataRepository.GetGeneticDataByIdAsync(id);
-
         }
         catch (Exception e)
         {

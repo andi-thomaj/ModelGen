@@ -10,7 +10,6 @@ public static class DataExtensions
         var dbContext = scope.ServiceProvider.GetRequiredService<ModelGenDbContext>();
         if (await dbContext.Database.EnsureCreatedAsync())
         {
-            
         }
     }
 }

@@ -5,5 +5,4 @@ namespace ModelGen.Infrastructure.Services;
 
 public class OrderService(IOrderRepository orderRepository) : IOrderService
 {
-
 }
